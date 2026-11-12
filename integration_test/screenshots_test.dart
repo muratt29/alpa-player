@@ -38,6 +38,10 @@ void main() {
     await tester.tap(find.text('Demo yayınlar'));
     await settle(tester, 3);
     await binding.takeScreenshot('3-canli-tv');
+    await tester.tap(find.text('Demo Yayın 1 (Apple HLS test)'));
+    await settle(tester, 20);
+    await binding.takeScreenshot('7-canli-oynatici');
+    await goBack(tester);
     await goBack(tester);
 
     await tester.tap(find.text('Filmler').last);
