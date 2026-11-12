@@ -14,6 +14,11 @@ Future<void> settle(WidgetTester t, [int seconds = 2]) async {
   }
 }
 
+Future<void> goBack(WidgetTester t) async {
+  t.state<NavigatorState>(find.byType(Navigator).first).pop();
+  await settle(t, 2);
+}
+
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -33,8 +38,7 @@ void main() {
     await tester.tap(find.text('Demo yayınlar'));
     await settle(tester, 3);
     await binding.takeScreenshot('3-canli-tv');
-    await tester.pageBack();
-    await settle(tester);
+    await goBack(tester);
 
     await tester.tap(find.text('Filmler').last);
     await settle(tester, 2);
@@ -45,10 +49,8 @@ void main() {
     await tester.tap(find.text('Big Buck Bunny (2008)'));
     await settle(tester, 15);
     await binding.takeScreenshot('5-oynatici');
-    await tester.pageBack();
-    await settle(tester, 2);
-    await tester.pageBack();
-    await settle(tester, 2);
+    await goBack(tester);
+    await goBack(tester);
 
     await tester.tap(find.text('Diziler').last);
     await settle(tester, 2);
